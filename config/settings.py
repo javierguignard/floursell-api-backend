@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
+    'corsheaders',
 ]
 
 MY_APPS = [
@@ -65,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -133,6 +136,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#CORS
+
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    #Set your correct cors
+    CORS_ORIGIN_WHITELIST = (
+        'localhost:9000',
+        '127.0.0.1:9000'
+    )
+
 
 JET_DEFAULT_THEME = 'light-violet'
 # JET_THEMES = [

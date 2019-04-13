@@ -38,6 +38,7 @@ class OrderListCreate(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
 
 
     def get_queryset(self):

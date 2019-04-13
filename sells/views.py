@@ -6,12 +6,13 @@ from sells.serializer import  CustomerSerializer, OrderSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
 class CustomerListCreate(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
 
     def get_queryset(self):
         user = self.request.user

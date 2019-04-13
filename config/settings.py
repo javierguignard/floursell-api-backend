@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MY_APPS = [
+    'accounts',
     'production',
     'sells',
 

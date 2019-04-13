@@ -19,10 +19,11 @@ from .views import test_reder_template
 
 urlpatterns = [
     path('', test_reder_template),
-    path(r'^auth/', include('rest_auth.urls')),
-    path(r'^registration/', include('rest_auth.registration.urls')),
+    path(r'auth/', include('rest_auth.urls')),
+    path(r'registration/', include('rest_auth.registration.urls')),
     path('', include('sells.urls')),
-    path(r'^jet/', include('jet.urls', 'jet')),
+    path('', include('accounts.urls')),
+    path(r'jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
 
 ]

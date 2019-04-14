@@ -50,3 +50,29 @@ class OrderListCreate(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+
+class SellListCreate(viewsets.ModelViewSet):
+    """
+    Example map to create:
+    {
+        "items": [{"product":1, "quantity":2}],
+        "created_by": null,
+        "customer": 1
+    }
+    """
+    queryset = Sell.objects.all()
+    serializer_class = SellSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return Sell.objects.filter(created_by=user)
+        else:
+            return Sell.objects.filter(created_by__lt=0)
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)

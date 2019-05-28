@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from sells.models import Customer, Order, Sell, Payment, ItemOrder, ItemSell
-from sells.serializer import  CustomerSerializer, OrderSerializer
+from sells.serializer import  CustomerSerializer, OrderSerializer, SellSerializer, PaymentCustomerSerializer
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -50,3 +50,42 @@ class OrderListCreate(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+
+class SellListCreate(viewsets.ModelViewSet):
+    queryset = Sell.objects.all()
+    serializer_class = SellSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return Sell.objects.filter(created_by=user)
+        else:
+            return Sell.objects.filter(created_by__lt=0)
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+class PaymentListCreate(viewsets.ModelViewSet):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentCustomerSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            return Payment.objects.filter(created_by=user)
+        else:
+            return Payment.objects.filter(created_by__lt=0)
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
+
+class ProductionOrderListCreate(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    authentication_classes = (TokenAuthentication, SessionAuthentication)

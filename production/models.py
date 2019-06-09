@@ -92,3 +92,14 @@ class Deliver(GenericModel):
 
 class DeliverItems(ProductItem):
     production = models.ForeignKey(Production, on_delete=models.CASCADE)
+
+class ProducedReport(GenericModel):
+    def __str__(self):
+        return '{}'.format(self.creation_date.strftime('%d/%m/%Y %H:%M hs'))
+
+    class Meta:
+        verbose_name = _('plantilla')
+        verbose_name_plural = _('plantillas')
+
+class ProducedItems(ProductItem):
+    report = models.ForeignKey(ProducedReport, verbose_name=_('plantilla'), related_name='items', on_delete=models.CASCADE)

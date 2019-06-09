@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customer,Sell,ItemSell,Order,ItemOrder
+from .models import Customer,Sell,ItemSell,Order,ItemOrder, Payment
 # Register your models here.
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
@@ -26,3 +26,9 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('customer', 'created_by', 'creation_date')
     search_fields = ('customer__name', 'created_by__username', )
     inlines = [ItemOrderAdmin]
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('customer', 'amount')
+    list_filter = ('customer', 'amount')
+    search_fields = ('customer__name', 'created_by__username', ) 

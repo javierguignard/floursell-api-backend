@@ -22,8 +22,9 @@ urlpatterns = [
     path(r'auth/', include('rest_auth.urls')),
     path(r'registration/', include('rest_auth.registration.urls')),
     path('', include('sells.urls')),
+    path('', include('production.urls')),
     path('', include('accounts.urls')),
-    path(r'jet/', include('jet.urls', 'jet')),
+    path(r'admin/jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
 
 ]

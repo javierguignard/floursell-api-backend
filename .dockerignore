@@ -1,0 +1,13 @@
+/static
+/__pycache__
+/.sass-cache
+/.git
+/postgres_data
+/pgadmin
+/postgresql
+db.sqlite3
+.env
+docker-compose.yml
+Dockerfile
+norma35.nginx.conf
+norma35-test.nginx.conf

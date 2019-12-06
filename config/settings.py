@@ -153,7 +153,8 @@ else:
     #Set your correct cors
     CORS_ORIGIN_WHITELIST = (
         'localhost:8000',
-        '127.0.0.1:8000'
+        '127.0.0.1:8000',
+        'backend:8000'
     )
 
 

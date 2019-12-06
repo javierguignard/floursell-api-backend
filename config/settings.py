@@ -142,6 +142,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  BASE_DIR + '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT =  BASE_DIR + '/media/'
 
 #CORS
 
@@ -150,8 +152,8 @@ if DEBUG:
 else:
     #Set your correct cors
     CORS_ORIGIN_WHITELIST = (
-        'localhost:9000',
-        '127.0.0.1:9000'
+        'localhost:8000',
+        '127.0.0.1:8000'
     )
 
 
